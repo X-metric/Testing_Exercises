@@ -10,5 +10,3 @@ def calculate_discount(amount: int, member: bool) -> float:
                 percentage *= 4 / 5
             return 1 - percentage
     raise RuntimeError("Logical error. Check implementation.")
-
-print(calculate_discount(3,True))
