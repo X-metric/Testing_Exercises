@@ -45,29 +45,18 @@ def test_expected_nonmember5():
 
 def test_expected_member1():
     assert calculate_discount(1,True) == approx(1/5)
-    assert calculate_discount(2,True) == approx(1/5)
-"""def test_expected_member2():
-    assert calculate_discount(3,True) == approx(1/4 + 1/5)
-def test_expected_member3():
-    assert calculate_discount(4,True) == approx(1/3 + 1/5)
-    assert calculate_discount(5,True) == approx(1/3 + 1/5)
-def test_expected_member4():
-    assert calculate_discount(6,True) == approx(1/2 + 1/5)
-    assert calculate_discount(7,True) == approx(1/2 + 1/5)
-    assert calculate_discount(8,True) == approx(1/2 + 1/5)
-    assert calculate_discount(9,True) == approx(1/2 + 1/5)
-    assert calculate_discount(10,True) == approx(1/2 + 1/5)"""
+    assert calculate_discount(2,True) == approx(0.2)
 def test_expected_member2():
-    assert calculate_discount(3,True) == approx(0.25 + 0.2)
+    assert calculate_discount(3,True) == approx(1/4 + 1/5 - (1/4 * 1/5))
 def test_expected_member3():
-    assert calculate_discount(4,True) == approx(0.33 + 0.2)
-    assert calculate_discount(5,True) == approx(0.33 + 0.2)
+    assert calculate_discount(4,True) == approx(1/3 + 1/5 - (1/3 * 1/5),rel=1e-2)
+    assert calculate_discount(5,True) == approx(0.33 + 0.2 - (0.33 * 0.2),rel=1e-2)
 def test_expected_member4():
-    assert calculate_discount(6,True) == approx(0.5 + 0.2)
-    assert calculate_discount(7,True) == approx(0.5 + 0.2)
-    assert calculate_discount(8,True) == approx(0.5 + 0.2)
-    assert calculate_discount(9,True) == approx(0.5 + 0.2)
-    assert calculate_discount(10,True) == approx(0.5 + 0.2)
+    assert calculate_discount(6,True) == approx(1/2 + 1/5 - (1/2 * 1/5))
+    assert calculate_discount(7,True) == approx(0.5 + 0.2 - (0.5 * 0.2))
+    assert calculate_discount(8,True) == approx(0.5 + 0.2 - (0.5 * 0.2))
+    assert calculate_discount(9,True) == approx(0.5 + 0.2 - (0.5 * 0.2))
+    assert calculate_discount(10,True) == approx(0.5 + 0.2 - (0.5 * 0.2))
 def test_expected_member5():
     with pytest.raises(ValueError) as error_message:
         calculate_discount(-1,True)
