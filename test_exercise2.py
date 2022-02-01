@@ -41,6 +41,7 @@ def test_expected_nonmember5():
         calculate_discount(1/2,False)
     assert str(error_message.value) == "amount must be an int"
     assert error_message.type == ValueError
+
 # -------------------------------------------------------------
 
 def test_expected_member1():
@@ -82,3 +83,14 @@ def test_expected_member5():
         calculate_discount(1/2,True)
     assert str(error_message.value) == "amount must be an int"
     assert error_message.type == ValueError
+
+# ----------------------------------------------------------------------------------
+
+def test_unexpected1():
+    assert calculate_discount(3, None) == approx(1/4 + 1/5 - (1/4 * 1/5))
+def test_unexpected2():
+    assert calculate_discount(3, "a") == approx(1/4 + 1/5 - (1/4 * 1/5))
+def test_unexpected3():
+    assert calculate_discount(3, 3) == approx(1/4 + 1/5 - (1/4 * 1/5))
+def test_unexpected4():
+    assert calculate_discount(3, 1/4) == approx(1/4 + 1/5 - (1/4 * 1/5))
