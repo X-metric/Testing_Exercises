@@ -94,10 +94,12 @@ def test_valid_input(total:Decimal,day:date,expected:Decimal):
 
 _test_data_invalid_input=[
     pytest.param("a",date(2022,12,24),id="81"),
-    pytest.param(Decimal("-1000.00"),date(2022,12,24),id="82"),
-    pytest.param(Decimal("100.00"),"a",id="83"),
-    pytest.param(Decimal("100.00"),date(2022,11,27),id="84"),
-    pytest.param(Decimal("100.00"),date(2022,12,26),id="85")]
+    pytest.param(Decimal("0.00"),date(2022,12,24),id="82"),
+    pytest.param(Decimal("-0.01"),date(2022,12,24),id="83"),
+    pytest.param(Decimal("-1000.00"),date(2022,12,24),id="84"),
+    pytest.param(Decimal("100.00"),"a",id="85"),
+    pytest.param(Decimal("100.00"),date(2022,11,27),id="86"),
+    pytest.param(Decimal("100.00"),date(2022,12,26),id="87")]
 
 @pytest.mark.parametrize("total,day",_test_data_invalid_input)
 def test_invalid_input(total:Decimal,day:date):
