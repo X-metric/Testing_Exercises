@@ -1,10 +1,10 @@
 import pytest
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 import time
+# from selenium.webdriver.support.select import Select
+# from selenium.webdriver.common.keys import Keys
 
 @pytest.fixture(scope="module")
 def brave_driver():
@@ -29,17 +29,16 @@ def test_first(brave_driver):
     brave_driver.get("https://radiothek.orf.at/search")
     search_bar = brave_driver.find_element(By.CSS_SELECTOR, "input[type=search]")
     confirm_button = brave_driver.find_element(By.CSS_SELECTOR, "button[type=submit]")
+    result_is_present = EC.presence_of_element_located((By.CSS_SELECTOR, "h2.results-title"))
     search_text = "Nachmittag"
 
     # Act
     search_bar.send_keys(search_text)
     confirm_button.click()
+    result_text = WebDriverWait(brave_driver, 10).until(result_is_present)
     # print(brave_driver.get_cookies())
 
     # Assert
-    result_is_present = EC.presence_of_element_located((By.CSS_SELECTOR, "h2.results-title"))
-    result_text = WebDriverWait(brave_driver, 10).until(result_is_present)
-
     assert result_text.text == f'Suchergebnis für "{search_text}"'
 
 
@@ -70,7 +69,7 @@ def test_second(brave_driver):
 def test_third(brave_driver):
     # Arrange
     search_option = brave_driver.find_element(By.CSS_SELECTOR,"span[title='Alle Sender']")
-    
+
     # Act
     search_option.click()
     search_option.location_once_scrolled_into_view
